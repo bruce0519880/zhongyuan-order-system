@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>中元普渡團購系統 v2.0 - 家樂福購物</title>
+    <title>🧨 2026 新春年貨團購系統 - 家樂福年貨大街</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
         
@@ -14,24 +14,39 @@
         }
 
         :root {
-            --primary: #2563EB;
-            --primary-dark: #1E40AF;
-            --primary-light: #60A5FA;
-            --success: #10B981;
-            --warning: #F59E0B;
-            --danger: #EF4444;
-            --dark: #1F2937;
-            --gray: #6B7280;
-            --light: #F9FAFB;
-            --white: #FFFFFF;
+            /* 春節配色 */
+            --primary: #D32F2F;      /* 正紅 */
+            --primary-dark: #B71C1C; /* 深紅 */
+            --primary-light: #FFCDD2; /* 淺紅 */
+            --gold: #FFC107;         /* 金黃 */
+            --gold-dark: #FF8F00;    /* 深金 */
+            --success: #2E7D32;      /* 翡翠綠 */
+            --bg-gradient: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%); /* 暖黃背景 */
+            --card-bg: #FFFFFF;
+            --text-main: #3E2723;
+            --text-light: #5D4037;
+            --border-radius: 16px;
         }
 
         body {
             font-family: 'Noto Sans TC', -apple-system, sans-serif;
-            background: linear-gradient(135deg, #EBF8FF 0%, #F0F9FF 50%, #FEF3C7 100%);
+            background: var(--bg-gradient);
             min-height: 100vh;
             padding: 20px;
-            color: var(--dark);
+            color: var(--text-main);
+            background-attachment: fixed;
+        }
+
+        /* 裝飾性背景圖案 (CSS 雲紋) */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(#D32F2F 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.03;
+            z-index: -1;
+            pointer-events: none;
         }
 
         .container {
@@ -41,36 +56,57 @@
 
         /* Header */
         .header {
-            background: var(--white);
+            background: #D32F2F;
+            background: linear-gradient(to right, #B71C1C, #D32F2F, #B71C1C);
             border-radius: 20px;
-            padding: 30px;
+            padding: 35px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(183, 28, 28, 0.3);
             text-align: center;
+            color: white;
+            border: 2px solid #FFC107;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 金色裝飾線 */
+        .header::after {
+            content: "";
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 2px;
+            background: radial-gradient(circle, #FFC107 0%, transparent 100%);
         }
 
         .header h1 {
             font-size: 2.5rem;
             font-weight: 900;
-            color: var(--primary);
+            color: #FFC107;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             margin-bottom: 10px;
+            letter-spacing: 2px;
         }
 
         .header p {
-            color: var(--gray);
+            color: #FFECB3;
             font-size: 1.1rem;
+            font-weight: 500;
         }
 
         /* Status Bar */
         .status-bar {
-            background: linear-gradient(135deg, #DBEAFE, #BFDBFE);
+            background: #FFFFFF;
             border-radius: 12px;
             padding: 15px 20px;
             margin-bottom: 25px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border: 2px solid var(--primary-light);
+            border: 2px solid #FFECB3;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
         .status-text {
@@ -78,26 +114,27 @@
             align-items: center;
             gap: 10px;
             font-weight: 600;
-            color: var(--primary-dark);
+            color: var(--primary);
         }
 
         .status-dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background: var(--success);
             border-radius: 50%;
+            box-shadow: 0 0 10px var(--success);
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
         }
 
         /* Main Grid */
         .main-grid {
             display: grid;
-            grid-template-columns: 1fr 350px;
+            grid-template-columns: 1fr 380px;
             gap: 25px;
         }
 
@@ -105,59 +142,69 @@
             .main-grid {
                 grid-template-columns: 1fr;
             }
-            .header h1 {
-                font-size: 1.8rem;
-            }
         }
 
         /* Card */
         .card {
-            background: var(--white);
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px rgba(62, 39, 35, 0.08);
             overflow: hidden;
+            border: 1px solid #FFE0B2;
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            box-shadow: 0 8px 25px rgba(211, 47, 47, 0.1);
         }
 
         .card-header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: var(--white);
+            background: linear-gradient(135deg, #FF6F00, #FF8F00);
+            color: #FFF;
             padding: 18px 24px;
-            font-weight: 600;
-            font-size: 1.1rem;
+            font-weight: 700;
+            font-size: 1.15rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .card-body {
             padding: 24px;
         }
 
-        /* Bookmarklet */
+        /* Bookmarklet - Red Envelope Style */
         .bookmarklet-section {
-            background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+            background: linear-gradient(135deg, #FFEBEE, #FFCDD2);
             border-radius: 16px;
-            padding: 25px;
+            padding: 30px;
             text-align: center;
             margin-bottom: 25px;
-            border: 2px dashed #F59E0B;
+            border: 2px dashed #EF5350;
+            position: relative;
         }
 
         .bookmarklet-btn {
             display: inline-block;
             margin: 15px 0;
-            padding: 15px 35px;
-            background: linear-gradient(135deg, #F59E0B, #D97706);
-            color: var(--white);
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #D32F2F, #B71C1C);
+            color: #FFC107;
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 50px;
             font-weight: 700;
             font-size: 1.1rem;
-            box-shadow: 0 6px 20px rgba(245,158,11,0.3);
+            box-shadow: 0 6px 20px rgba(183, 28, 28, 0.4);
+            border: 2px solid #FFC107;
             transition: all 0.3s;
             cursor: move;
         }
 
         .bookmarklet-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(245,158,11,0.4);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(183, 28, 28, 0.5);
+            color: #FFF;
         }
 
         /* Form */
@@ -167,25 +214,39 @@
 
         .form-label {
             display: block;
-            font-weight: 500;
-            color: var(--dark);
-            margin-bottom: 6px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
             font-size: 0.95rem;
         }
 
         .form-control {
             width: 100%;
-            padding: 10px 14px;
-            border: 2px solid #E5E7EB;
+            padding: 12px 14px;
+            border: 2px solid #FFCCBC;
             border-radius: 8px;
             font-size: 1rem;
             transition: all 0.3s;
+            background: #FFFBFA;
+            /* appearance: none; */
+        }
+
+        select.form-control {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23D32F2F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+            padding-right: 40px;
+            appearance: none;
+            -webkit-appearance: none;
         }
 
         .form-control:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+            box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+            background-color: #FFF;
         }
 
         textarea.form-control {
@@ -197,9 +258,9 @@
         .tabs {
             display: flex;
             gap: 8px;
-            background: var(--light);
-            padding: 4px;
-            border-radius: 8px;
+            background: #FFF3E0;
+            padding: 6px;
+            border-radius: 12px;
             margin-bottom: 20px;
         }
 
@@ -208,50 +269,75 @@
             padding: 10px;
             background: transparent;
             border: none;
-            border-radius: 6px;
-            font-weight: 500;
-            color: var(--gray);
+            border-radius: 8px;
+            font-weight: 600;
+            color: #795548;
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .tab.active {
-            background: var(--white);
+            background: #FFF;
             color: var(--primary);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Paste Zone */
+        /* Paste Zone - Couplet Style */
         .paste-zone {
-            background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
-            border: 2px dashed var(--primary);
+            background: #FFEBEE;
+            border: 2px dashed #D32F2F;
             border-radius: 12px;
             padding: 35px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
+            position: relative;
+        }
+
+        .paste-zone::after {
+            content: "招財進寶";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 0.8rem;
+            color: rgba(211, 47, 47, 0.3);
+            writing-mode: vertical-rl;
+            font-family: serif;
         }
 
         .paste-zone:hover {
-            background: linear-gradient(135deg, #DBEAFE, #BFDBFE);
+            background: #FFCDD2;
+            border-color: #B71C1C;
         }
 
         /* Product List */
         .product-list {
-            max-height: 450px;
+            max-height: 500px;
             overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        /* Category Section Styles */
+        .category-section {
+            margin-bottom: 20px;
+        }
+        
+        .category-header {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #B71C1C;
+            background: #FFCCBC;
+            padding: 6px 14px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .product-item {
-            background: var(--light);
+            background: #FFF8E1;
             border-radius: 10px;
             padding: 14px;
             margin-bottom: 10px;
@@ -259,24 +345,27 @@
             align-items: center;
             gap: 12px;
             transition: all 0.3s;
+            border: 1px solid #FFE0B2;
         }
 
         .product-item:hover {
             transform: translateX(4px);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(255, 111, 0, 0.15);
+            border-color: #FFB74D;
         }
 
         .product-number {
-            width: 32px;
-            height: 32px;
-            background: var(--primary);
-            color: var(--white);
+            width: 28px;
+            height: 28px;
+            background: #FFECB3;
+            color: #BF360C;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            flex-shrink: 0;
         }
 
         .product-info {
@@ -285,13 +374,14 @@
 
         .product-name {
             font-weight: 600;
-            color: var(--dark);
+            color: #3E2723;
+            font-size: 1.05rem;
             margin-bottom: 4px;
         }
 
         .product-details {
             font-size: 0.85rem;
-            color: var(--gray);
+            color: #795548;
             display: flex;
             gap: 12px;
         }
@@ -299,41 +389,42 @@
         .product-remove {
             width: 30px;
             height: 30px;
-            background: var(--danger);
-            color: var(--white);
-            border: none;
+            background: #FFF;
+            color: var(--primary);
+            border: 1px solid var(--primary);
             border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s;
-            font-size: 1.2rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
         }
 
         .product-remove:hover {
-            background: #DC2626;
-            transform: scale(1.1);
+            background: var(--primary);
+            color: #FFF;
         }
 
         /* Empty State */
         .empty-state {
             text-align: center;
             padding: 40px;
-            color: var(--gray);
+            color: #8D6E63;
         }
 
         .empty-icon {
-            font-size: 3.5rem;
-            margin-bottom: 12px;
-            opacity: 0.3;
+            font-size: 4rem;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
         }
 
         /* Button */
         .btn {
             padding: 12px 24px;
             border-radius: 8px;
-            font-weight: 600;
+            font-weight: 700;
             border: none;
             cursor: pointer;
             transition: all 0.3s;
@@ -345,30 +436,33 @@
         }
 
         .btn-primary {
-            background: var(--primary);
-            color: var(--white);
+            background: linear-gradient(to bottom, #D32F2F, #B71C1C);
+            color: #FFECB3;
+            border-bottom: 3px solid #8E0000;
         }
 
         .btn-primary:hover:not(:disabled) {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+            transform: translateY(1px);
+            border-bottom-width: 1px;
+            filter: brightness(1.1);
         }
 
         .btn-success {
-            background: var(--success);
-            color: var(--white);
+            background: linear-gradient(to bottom, #43A047, #2E7D32);
+            color: white;
+            border-bottom: 3px solid #1B5E20;
         }
 
         .btn-secondary {
-            background: var(--light);
-            color: var(--dark);
-            border: 2px solid #E5E7EB;
+            background: #FFF;
+            color: #5D4037;
+            border: 2px solid #D7CCC8;
         }
 
         .btn:disabled {
-            opacity: 0.5;
+            opacity: 0.6;
             cursor: not-allowed;
+            filter: grayscale(1);
         }
 
         .btn-block {
@@ -376,8 +470,8 @@
         }
 
         .btn-lg {
-            padding: 14px 28px;
-            font-size: 1.05rem;
+            padding: 15px 28px;
+            font-size: 1.1rem;
         }
 
         /* Stats */
@@ -391,20 +485,20 @@
         .stat {
             text-align: center;
             padding: 12px;
-            background: var(--light);
+            background: #FFF8E1;
             border-radius: 8px;
+            border: 1px solid #FFE0B2;
         }
 
         .stat-value {
             font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
+            font-weight: 800;
+            color: #D32F2F;
         }
 
         .stat-label {
             font-size: 0.8rem;
-            color: var(--gray);
-            text-transform: uppercase;
+            color: #795548;
             margin-top: 2px;
         }
 
@@ -413,7 +507,7 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            background: var(--white);
+            background: #FFF;
             padding: 14px 18px;
             border-radius: 8px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
@@ -423,6 +517,7 @@
             min-width: 280px;
             animation: slideIn 0.3s;
             z-index: 9999;
+            border: 1px solid #EEE;
         }
 
         @keyframes slideIn {
@@ -430,9 +525,9 @@
             to { transform: translateX(0); }
         }
 
-        .toast.success { border-left: 4px solid var(--success); }
-        .toast.error { border-left: 4px solid var(--danger); }
-        .toast.warning { border-left: 4px solid var(--warning); }
+        .toast.success { border-left: 5px solid #2E7D32; }
+        .toast.error { border-left: 5px solid #D32F2F; }
+        .toast.warning { border-left: 5px solid #FFC107; }
 
         /* Loading */
         .loading {
@@ -440,7 +535,7 @@
             width: 18px;
             height: 18px;
             border: 2px solid rgba(255,255,255,0.3);
-            border-top-color: var(--white);
+            border-top-color: #FFC107;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
@@ -451,22 +546,37 @@
 
         /* Instructions */
         .instructions {
-            background: #F0F9FF;
-            border: 1px solid #BAE6FD;
+            background: #EFEBE9;
+            border: 1px solid #D7CCC8;
             border-radius: 8px;
             padding: 15px;
             margin-top: 20px;
         }
 
         .instructions h4 {
-            color: var(--primary-dark);
+            color: #5D4037;
             margin-bottom: 10px;
         }
 
         .instructions ol {
             margin-left: 20px;
-            color: var(--gray);
+            color: #6D4C41;
             line-height: 1.8;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF3E0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FFB74D;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #F57C00;
         }
     </style>
 </head>
@@ -474,17 +584,18 @@
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <h1>🏮 中元普渡團購系統 v2.0</h1>
-            <p>家樂福線上購物 - 自動整合 Google Sheets</p>
+            <div style="font-size: 3rem; margin-bottom: 10px;">🐲</div>
+            <h1>🏮 2026 新春年貨團購系統</h1>
+            <p>家樂福年貨大街 - 智慧分類版</p>
         </header>
 
         <!-- Status Bar -->
         <div class="status-bar">
             <div class="status-text">
                 <div class="status-dot"></div>
-                <span>Google Sheets 已連接</span>
+                <span>系統連線正常，財源廣進</span>
             </div>
-            <small style="color: var(--gray);">資料將自動儲存到雲端</small>
+            <small style="color: #795548;">🧧 資料將自動儲存到雲端</small>
         </div>
 
         <div class="main-grid">
@@ -492,51 +603,71 @@
             <main>
                 <!-- Bookmarklet -->
                 <div class="bookmarklet-section">
-                    <h3 style="margin-bottom: 8px;">🚀 快速擷取商品工具（含數量）</h3>
-                    <p style="font-size: 0.9rem; color: #92400E;">將下方按鈕拖曳到書籤列，在家樂福商品頁面點擊使用</p>
+                    <h3 style="margin-bottom: 8px; color: #B71C1C;">🧧 新春年貨快速擷取神器</h3>
+                    <p style="font-size: 0.95rem; color: #8E0000; font-weight: 500;">
+                        將下方按鈕拖曳到書籤列，系統會自動判斷商品類別！
+                    </p>
                     
-                    <a href="javascript:(function(){try{var d={n:'',p:'',q:1,u:window.location.href};var h1=document.querySelector('h1');if(h1)d.n=h1.innerText.trim();var priceSelectors=['.money','em','.final-price','.price span','.price','.selling-price'];for(var s of priceSelectors){var el=document.querySelector(s);if(el){var txt=(el.innerText||el.textContent||'').replace(/[^\d]/g,'');if(txt&&parseInt(txt)>0){d.p=txt;break;}}}if(!d.p){document.querySelectorAll('[class*=price]').forEach(function(el){if(!d.p){var t=(el.innerText||'').replace(/[^\d]/g,'');if(t&&parseInt(t)>0&&t.length<=4)d.p=t;}});}var inputs=document.querySelectorAll('input');for(var i=0;i<inputs.length;i++){var val=inputs[i].value;if(val&&/^\d+$/.test(val)&&parseInt(val)>0&&parseInt(val)<100){d.q=parseInt(val);break;}}var data='###'+JSON.stringify(d)+'###';navigator.clipboard.writeText(data).then(function(){alert('✅ 擷取成功！\n\n📦 商品：'+d.n+'\n💰 單價：$'+(d.p||'需手動輸入')+'\n🔢 數量：'+d.q+'件\n\n請回到團購系統貼上');}).catch(function(){prompt('請複製：',data);});}catch(e){alert('擷取失敗');}})();" 
+                    <a href="javascript:(function(){try{var d={n:'',p:'',q:1,u:window.location.href};var h1=document.querySelector('h1');if(h1)d.n=h1.innerText.trim();var priceSelectors=['.money','em','.final-price','.price span','.price','.selling-price'];for(var s of priceSelectors){var el=document.querySelector(s);if(el){var txt=(el.innerText||el.textContent||'').replace(/[^\d]/g,'');if(txt&&parseInt(txt)>0){d.p=txt;break;}}}if(!d.p){document.querySelectorAll('[class*=price]').forEach(function(el){if(!d.p){var t=(el.innerText||'').replace(/[^\d]/g,'');if(t&&parseInt(t)>0&&t.length<=4)d.p=t;}});}var inputs=document.querySelectorAll('input');for(var i=0;i<inputs.length;i++){var val=inputs[i].value;if(val&&/^\d+$/.test(val)&&parseInt(val)>0&&parseInt(val)<100){d.q=parseInt(val);break;}}var data='###'+JSON.stringify(d)+'###';navigator.clipboard.writeText(data).then(function(){alert('🧧 年貨擷取成功！\n\n📦 品項：'+d.n+'\n💰 特價：$'+(d.p||'需手動輸入')+'\n🔢 數量：'+d.q+'件\n\n快回到團購系統貼上，我會自動幫你分類！');}).catch(function(){prompt('請複製年貨資料：',data);});}catch(e){alert('擷取失敗');}})();" 
                            class="bookmarklet-btn">
-                        📋 家樂福商品擷取器 v2.0
+                        💰 家樂福年貨擷取 v2.6
                     </a>
                     
-                    <p style="font-size: 0.85rem; color: #92400E;">
-                        ✅ 自動擷取商品名稱、價格、數量
+                    <p style="font-size: 0.85rem; color: #A1887F; margin-top: 10px;">
+                        🌸 支援自動識別：年菜、零食、飲料、禮盒、拜拜用品
                     </p>
                 </div>
 
                 <!-- Product Input -->
                 <div class="card">
-                    <div class="card-header">📝 新增商品</div>
+                    <div class="card-header">
+                        <span>📝 登記年貨</span>
+                        <span style="font-size: 0.9rem; opacity: 0.9;">大吉大利</span>
+                    </div>
                     <div class="card-body">
                         <div class="tabs">
-                            <button class="tab active" onclick="CarrefourApp.switchTab('smart')">✨ 智慧輸入</button>
+                            <button class="tab active" onclick="CarrefourApp.switchTab('smart')">✨ 智慧貼上</button>
                             <button class="tab" onclick="CarrefourApp.switchTab('manual')">✏️ 手動輸入</button>
-                            <button class="tab" onclick="CarrefourApp.switchTab('batch')">📋 批次輸入</button>
+                            <button class="tab" onclick="CarrefourApp.switchTab('batch')">📋 批次登記</button>
                         </div>
 
                         <!-- Smart Input -->
                         <div id="smartTab" class="tab-content active">
                             <div class="paste-zone" onclick="document.getElementById('smartInput').focus()">
-                                <div style="font-size: 2.5rem;">📥</div>
-                                <h4 style="margin: 10px 0;">點擊這裡或按 Ctrl+V</h4>
+                                <div style="font-size: 3rem;">🧨</div>
+                                <h4 style="margin: 10px 0; color: #B71C1C;">點擊這裡或按 Ctrl+V</h4>
                                 <input type="text" id="smartInput" class="form-control" 
-                                       placeholder="使用書籤工具後貼上" 
+                                       placeholder="貼上剛才擷取的年貨資料" 
                                        onpaste="CarrefourApp.handleSmartPaste(event)"
-                                       style="max-width: 400px; margin: 10px auto;">
+                                       style="max-width: 400px; margin: 10px auto; text-align: center;">
+                                <div style="margin-top: 10px; font-size: 0.9rem; color: #8D6E63;">
+                                    (系統將自動依據商品名稱進行分類：零食、飲料、年菜等)
+                                </div>
                             </div>
                         </div>
 
                         <!-- Manual Input -->
                         <div id="manualTab" class="tab-content">
                             <div class="form-group">
-                                <label class="form-label">商品名稱</label>
-                                <input type="text" id="manualName" class="form-control" placeholder="例：樂事洋芋片">
+                                <label class="form-label">年貨類別</label>
+                                <select id="manualCategory" class="form-control">
+                                    <option value="🍪 零食餅乾">🍪 零食餅乾</option>
+                                    <option value="🥤 飲料酒水">🥤 飲料酒水</option>
+                                    <option value="🍲 年菜生鮮">🍲 年菜生鮮</option>
+                                    <option value="🎁 禮盒伴手">🎁 禮盒伴手</option>
+                                    <option value="🙏 拜拜用品">🙏 拜拜用品</option>
+                                    <option value="🧹 居家清潔">🧹 居家清潔</option>
+                                    <option value="📦 其他">📦 其他</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">年貨名稱</label>
+                                <input type="text" id="manualName" class="form-control" placeholder="例：萬歲牌開心果禮盒">
                             </div>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
                                 <div class="form-group">
                                     <label class="form-label">價格</label>
-                                    <input type="number" id="manualPrice" class="form-control" placeholder="89">
+                                    <input type="number" id="manualPrice" class="form-control" placeholder="299">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">數量</label>
@@ -544,16 +675,17 @@
                                 </div>
                             </div>
                             <button class="btn btn-primary btn-block" onclick="CarrefourApp.addManualProduct()">
-                                ➕ 加入商品
+                                ➕ 加入購物車
                             </button>
                         </div>
 
                         <!-- Batch Input -->
                         <div id="batchTab" class="tab-content">
                             <div class="form-group">
-                                <label class="form-label">批次輸入（商品名稱,價格,數量）</label>
+                                <label class="form-label">批次輸入（名稱,價格,數量）</label>
+                                <div style="font-size: 0.85rem; color: #8D6E63; margin-bottom: 5px;">* 系統會自動辨識類別</div>
                                 <textarea id="batchInput" class="form-control" rows="6" 
-                                          placeholder="可口可樂,35,6&#10;洋芋片,89,3"></textarea>
+                                          placeholder="佛跳牆,899,1&#10;可樂,35,12&#10;金莎巧克力,299,5"></textarea>
                             </div>
                             <button class="btn btn-primary btn-block" onclick="CarrefourApp.processBatch()">
                                 📥 批次新增
@@ -565,17 +697,18 @@
                 <!-- Product List -->
                 <div class="card" style="margin-top: 20px;">
                     <div class="card-header">
-                        🛒 購物清單
-                        <span style="float: right; background: rgba(255,255,255,0.2); padding: 2px 10px; border-radius: 12px; font-size: 0.9rem;">
-                            <span id="productCount">0</span> 項
+                        🛒 採購清單
+                        <span style="float: right; background: rgba(255,255,255,0.2); padding: 2px 12px; border-radius: 20px; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.4);">
+                            <span id="productCount">0</span> 項商品
                         </span>
                     </div>
                     <div class="card-body">
                         <div class="product-list" id="productList">
+                            <!-- Empty State -->
                             <div class="empty-state">
-                                <div class="empty-icon">🛍️</div>
-                                <div>購物車是空的</div>
-                                <small>開始新增商品吧！</small>
+                                <div class="empty-icon">🍊</div>
+                                <div style="font-weight: 600;">還沒有選購年貨喔</div>
+                                <small>趕快去挑選，好運旺旺來！</small>
                             </div>
                         </div>
                     </div>
@@ -594,18 +727,18 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">聯絡方式</label>
-                            <input type="text" id="userContact" class="form-control" placeholder="手機或Email">
+                            <input type="text" id="userContact" class="form-control" placeholder="手機或分機">
                         </div>
                         <div class="form-group">
                             <label class="form-label">備註</label>
-                            <textarea id="userNote" class="form-control" placeholder="特殊需求"></textarea>
+                            <textarea id="userNote" class="form-control" placeholder="例如：禮盒需要提袋"></textarea>
                         </div>
                     </div>
                 </div>
 
                 <!-- Stats -->
                 <div class="card" style="margin-top: 20px;">
-                    <div class="card-header">📊 訂單摘要</div>
+                    <div class="card-header">📊 結帳預覽</div>
                     <div class="card-body">
                         <div class="stats">
                             <div class="stat">
@@ -614,11 +747,11 @@
                             </div>
                             <div class="stat">
                                 <div class="stat-value" id="statQty">0</div>
-                                <div class="stat-label">數量</div>
+                                <div class="stat-label">總件數</div>
                             </div>
                             <div class="stat">
                                 <div class="stat-value" id="statTotal">$0</div>
-                                <div class="stat-label">總額</div>
+                                <div class="stat-label">預估金額</div>
                             </div>
                         </div>
 
@@ -627,22 +760,22 @@
                         </button>
 
                         <button class="btn btn-secondary btn-block" onclick="CarrefourApp.downloadBackup()" style="margin-top: 10px;">
-                            💾 下載備份
+                            💾 下載分類清單
                         </button>
                     </div>
                 </div>
 
                 <!-- Instructions -->
                 <div class="card" style="margin-top: 20px;">
-                    <div class="card-header">📖 使用說明</div>
+                    <div class="card-header">📖 辦年貨指南</div>
                     <div class="card-body">
                         <div class="instructions">
                             <h4>快速上手：</h4>
                             <ol>
-                                <li>拖曳橘色按鈕到書籤列</li>
-                                <li>到家樂福網站選商品</li>
-                                <li>調整數量後點擊書籤</li>
-                                <li>回來貼上並提交</li>
+                                <li>將上方紅色按鈕拖曳到書籤列</li>
+                                <li>前往家樂福線上購物挑選年菜</li>
+                                <li>點選書籤自動抓取價格</li>
+                                <li>回來貼上，系統會自動分類！</li>
                             </ol>
                         </div>
                     </div>
@@ -659,7 +792,7 @@
             // ===== 配置 =====
             const CONFIG = {
                 SHEETS_URL: 'https://script.google.com/macros/s/AKfycbxYZJn799xcOqBA4NZScrBhiASNHPbYKxpbIHp3GFM01Xf8xIjNqIdoWMug1auzVsq6Hg/exec',
-                STORAGE_KEY: 'carrefour_products_v2',
+                STORAGE_KEY: 'carrefour_cny_products_v4', // 更新Key以確保新格式
                 NAME_KEY: 'carrefour_username_v2'
             };
             
@@ -700,6 +833,68 @@
                 event.target.classList.add('active');
                 document.getElementById(tab + 'Tab').classList.add('active');
             }
+
+            // 自動分類邏輯 (優化版 - 零食飲料分離)
+            function autoClassify(name) {
+                if (!name) return '📦 其他';
+
+                // 預處理：解決特殊衝突
+                if (name.includes('鍋')) return '🍲 年菜生鮮'; // 只要有鍋，通常是年菜
+
+                // 順序很重要：越具體的越前面，越通用的越後面
+                const rules = [
+                    // 1. 禮盒/伴手禮 (最高優先級)
+                    { 
+                        key: '🎁 禮盒伴手', 
+                        words: ['禮盒', '禮袋', '特產', '鳳梨酥', '燕窩', '雞精', '人蔘', '送禮', '蛋捲', '肉乾禮盒', '海苔禮盒'] 
+                    },
+                    // 2. 拜拜用品 (特殊用途)
+                    { 
+                        key: '🙏 拜拜用品', 
+                        words: ['金紙', '香', '燭', '紙錢', '發糕', '拜拜', '普渡', '三牲', '素果', '供品'] 
+                    },
+                    // 3. 居家清潔 (避免誤判為食物)
+                    { 
+                        key: '🧹 居家清潔', 
+                        words: ['衛生紙', '廚紙', '濕巾', '清潔', '洗碗', '洗衣', '刷', '垃圾袋', '皂', '牙膏', '沐浴', '洗髮', '拖把', '妙潔'] 
+                    },
+                    // 4. 飲料酒水 (獨立類別)
+                    { 
+                        key: '🥤 飲料酒水', 
+                        words: [
+                            '可樂', '雪碧', '沙士', '茶', '飲', '咖啡', '奶茶', '果汁', '汽水', 
+                            '礦泉水', '啤酒', '黑麥汁', '牛乳', '鮮乳', '牛奶', '舒跑', '運動飲料', 
+                            '燕麥奶', '豆漿', '米漿', '杏仁茶', '楊桃汁', '酸梅湯', '氣泡水', '酒', '威士忌', '高粱', '水'
+                        ] 
+                    },
+                    // 5. 零食餅乾 (獨立類別)
+                    { 
+                        key: '🍪 零食餅乾', 
+                        words: [
+                            '樂事', '乖乖', '巧克力', '糖', '餅', '堅果', '洋芋片', '瓜子', 
+                            '魷魚絲', '肉乾', '海苔', '凍', '布丁', '豆', '薯片', '米果', 
+                            '泡芙', '夾心', '酥', '脆', '點心麵', '科學麵', '鱈魚香絲'
+                        ] 
+                    },
+                    // 6. 年菜生鮮 (通用食材關鍵字，放在最後當作捕捉網)
+                    { 
+                        key: '🍲 年菜生鮮', 
+                        words: [
+                            '牛', '豬', '雞', '鴨', '魚', '蝦', '蟹', '羊',
+                            '佛跳牆', '丸', '餃', '菜', '肉', '海鮮', 
+                            '油', '米', '麵', '湯', '腸', '肚', '腿', '排', 
+                            '生鮮', '水果', '蘋果', '梨', '橘'
+                        ] 
+                    }
+                ];
+
+                for (const rule of rules) {
+                    if (rule.words.some(word => name.includes(word))) {
+                        return rule.key;
+                    }
+                }
+                return '📦 其他';
+            }
             
             // 智慧貼上
             function handleSmartPaste(event) {
@@ -710,20 +905,24 @@
                     if (text.startsWith('###') && text.endsWith('###')) {
                         try {
                             const data = JSON.parse(text.slice(3, -3));
+                            const name = data.n || '未知年貨';
+                            const category = autoClassify(name);
+                            
                             addProduct({
-                                name: data.n || '未知商品',
+                                name: name,
                                 price: parseInt(data.p) || 0,
                                 quantity: parseInt(data.q) || 1,
+                                category: category,
                                 url: data.u || ''
                             });
                             input.value = '';
                             const qty = data.q || 1;
-                            showToast('success', `✅ 已新增 ${data.n} × ${qty}件`);
+                            showToast('success', `🧧 已登記 ${name} (分類: ${category})`);
                         } catch (e) {
                             showToast('error', '❌ 格式錯誤');
                         }
                     } else {
-                        showToast('warning', '⚠️ 請使用書籤工具');
+                        showToast('warning', '⚠️ 請使用書籤工具擷取');
                     }
                     input.value = '';
                 }, 50);
@@ -734,6 +933,8 @@
                 products.push({
                     id: Date.now() + Math.random(),
                     ...product,
+                    // 確保一定有分類
+                    category: product.category || '📦 其他',
                     subtotal: product.price * product.quantity
                 });
                 saveData();
@@ -742,6 +943,7 @@
             
             // 手動新增
             function addManualProduct() {
+                const category = document.getElementById('manualCategory').value;
                 const name = document.getElementById('manualName').value.trim();
                 const price = parseInt(document.getElementById('manualPrice').value) || 0;
                 const quantity = parseInt(document.getElementById('manualQty').value) || 1;
@@ -751,13 +953,13 @@
                     return;
                 }
                 
-                addProduct({ name, price, quantity, url: '' });
+                addProduct({ name, price, quantity, category, url: '' });
                 
                 document.getElementById('manualName').value = '';
                 document.getElementById('manualPrice').value = '';
                 document.getElementById('manualQty').value = '1';
                 
-                showToast('success', `✅ 已新增 ${name}`);
+                showToast('success', `🧧 已新增 ${name}`);
             }
             
             // 批次處理
@@ -772,10 +974,12 @@
                 text.split('\n').forEach(line => {
                     const parts = line.split(',').map(p => p.trim());
                     if (parts.length >= 2) {
+                        const name = parts[0];
                         addProduct({
-                            name: parts[0],
+                            name: name,
                             price: parseInt(parts[1]) || 0,
                             quantity: parseInt(parts[2]) || 1,
+                            category: autoClassify(name), // 自動分類
                             url: ''
                         });
                         count++;
@@ -784,7 +988,7 @@
                 
                 if (count > 0) {
                     document.getElementById('batchInput').value = '';
-                    showToast('success', `✅ 新增 ${count} 項商品`);
+                    showToast('success', `✨ 成功加入 ${count} 項年貨並自動分類`);
                 }
             }
             
@@ -795,7 +999,7 @@
                 updateUI();
             }
             
-            // 更新UI
+            // 更新UI (分組顯示)
             function updateUI() {
                 const list = document.getElementById('productList');
                 const count = document.getElementById('productCount');
@@ -805,26 +1009,58 @@
                 if (products.length === 0) {
                     list.innerHTML = `
                         <div class="empty-state">
-                            <div class="empty-icon">🛍️</div>
-                            <div>購物車是空的</div>
-                            <small>開始新增商品吧！</small>
+                            <div class="empty-icon">🍊</div>
+                            <div style="font-weight: 600;">還沒有選購年貨喔</div>
+                            <small>趕快去挑選，好運旺旺來！</small>
                         </div>
                     `;
                 } else {
-                    list.innerHTML = products.map((p, i) => `
-                        <div class="product-item">
-                            <div class="product-number">${i + 1}</div>
-                            <div class="product-info">
-                                <div class="product-name">${p.name}</div>
-                                <div class="product-details">
-                                    <span>💰 $${p.price}</span>
-                                    <span>📦 ${p.quantity}件</span>
-                                    <span>💵 $${p.subtotal}</span>
+                    // 分組邏輯
+                    const groups = {};
+                    products.forEach(p => {
+                        if (!groups[p.category]) groups[p.category] = [];
+                        groups[p.category].push(p);
+                    });
+
+                    // 排序類別：確保特定順序 (例如：年菜 > 零食 > 飲料 > 禮盒 > 拜拜 > 其他)
+                    const sortOrder = ['🍲 年菜生鮮', '🍪 零食餅乾', '🥤 飲料酒水', '🎁 禮盒伴手', '🙏 拜拜用品', '🧹 居家清潔', '📦 其他'];
+                    const sortedCategories = Object.keys(groups).sort((a, b) => {
+                        return sortOrder.indexOf(a) - sortOrder.indexOf(b);
+                    });
+
+                    let html = '';
+                    sortedCategories.forEach(category => {
+                        const items = groups[category];
+                        const subtotal = items.reduce((sum, item) => sum + item.subtotal, 0);
+                        
+                        html += `
+                            <div class="category-section">
+                                <div class="category-header">
+                                    ${category} <span style="font-size:0.8rem; margin-left:5px; opacity:0.8;">(${items.length})</span>
+                                    <span style="margin-left:auto; font-size:0.9rem;">$${subtotal}</span>
                                 </div>
-                            </div>
-                            <button class="product-remove" onclick="CarrefourApp.removeProduct(${p.id})">×</button>
-                        </div>
-                    `).join('');
+                        `;
+                        
+                        items.forEach((p, i) => {
+                             html += `
+                                <div class="product-item">
+                                    <div class="product-info">
+                                        <div class="product-name">${p.name}</div>
+                                        <div class="product-details">
+                                            <span>💰 $${p.price}</span>
+                                            <span>📦 ${p.quantity}件</span>
+                                            <span style="color:#D32F2F; font-weight:bold;">💵 $${p.subtotal}</span>
+                                        </div>
+                                    </div>
+                                    <button class="product-remove" onclick="CarrefourApp.removeProduct(${p.id})">×</button>
+                                </div>
+                            `;
+                        });
+                        
+                        html += `</div>`;
+                    });
+                    
+                    list.innerHTML = html;
                 }
                 
                 document.getElementById('statTypes').textContent = products.length;
@@ -836,7 +1072,7 @@
             async function submitOrder() {
                 const name = document.getElementById('userName').value.trim();
                 if (!name) {
-                    showToast('error', '❌ 請填寫姓名');
+                    showToast('error', '❌ 請填寫訂購人姓名');
                     return;
                 }
                 
@@ -847,7 +1083,7 @@
                 
                 const btn = document.getElementById('submitBtn');
                 btn.disabled = true;
-                btn.innerHTML = '<span class="loading"></span> 提交中...';
+                btn.innerHTML = '<span class="loading"></span> 傳送中...';
                 
                 const orderData = {
                     name,
@@ -865,7 +1101,7 @@
                         body: JSON.stringify(orderData)
                     });
                     
-                    showToast('success', '✅ 訂單已提交！');
+                    showToast('success', '🎆 訂單已提交！新年快樂！');
                     
                     products = [];
                     localStorage.removeItem(CONFIG.STORAGE_KEY);
@@ -874,7 +1110,7 @@
                     updateUI();
                     
                 } catch (error) {
-                    showToast('error', '❌ 提交失敗，請重試');
+                    showToast('error', '❌ 提交失敗，請檢查網路');
                     console.error(error);
                 } finally {
                     btn.disabled = false;
@@ -890,25 +1126,36 @@
                     return;
                 }
                 
-                let text = `中元普渡團購訂單\n`;
+                let text = `🏮 新春年貨團購訂單 🏮\n`;
                 text += `${'='.repeat(30)}\n`;
                 text += `訂購人：${name}\n`;
                 text += `時間：${new Date().toLocaleString('zh-TW')}\n\n`;
                 
-                products.forEach((p, i) => {
-                    text += `${i + 1}. ${p.name}\n`;
-                    text += `   $${p.price} × ${p.quantity} = $${p.subtotal}\n\n`;
+                // 分組輸出備份
+                const groups = {};
+                products.forEach(p => {
+                    if (!groups[p.category]) groups[p.category] = [];
+                    groups[p.category].push(p);
                 });
                 
-                text += `總計：$${products.reduce((sum, p) => sum + p.subtotal, 0)}`;
+                for (const [category, items] of Object.entries(groups)) {
+                    text += `\n【${category}】\n`;
+                    items.forEach((p, i) => {
+                         text += `   - ${p.name} ($${p.price} × ${p.quantity})\n`;
+                    });
+                }
+                
+                text += `\n${'='.repeat(30)}\n`;
+                text += `💰 總計：$${products.reduce((sum, p) => sum + p.subtotal, 0)}`;
+                text += `\n\n🎉 祝您新年快樂，萬事如意！`;
                 
                 const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
                 const link = document.createElement('a');
                 link.href = URL.createObjectURL(blob);
-                link.download = `團購訂單_${name}_${new Date().toISOString().slice(0,10)}.txt`;
+                link.download = `年貨訂單_${name}_${new Date().toISOString().slice(0,10)}.txt`;
                 link.click();
                 
-                showToast('success', '✅ 已下載備份');
+                showToast('success', '💾 已下載分類備份清單');
             }
             
             // 顯示提示
